@@ -1,37 +1,20 @@
 import React, { Component } from 'react';
 import { DatePicker, Button } from 'antd';
+import PositionTable from './components/PositionTable.js';
 
 import './index.css';
 
 class App extends Component {
-    state = {
-        data: []
-    }
-
-    componentWillMount(){
-        fetch('http://localhost:9000/positions',{
-            method: 'GET',
-            headers: {
-                "content-type": "application/json",
-                "Accept": "application/json",
-            },
-        })
-        .then(response => response.json())
-        .then(resp => {
-            console.log(resp);
-            this.setState({
-                data: resp.data
-            })
-        })
-    }
-
     render(){
         return (
           <div style={{ margin: 100 }}>
-            <h1>AntDesign Demo</h1>
+            <h1>Liga de Football Femenina</h1>
+            <Button>OK </ Button>
+
             <hr /><br />
-            <DatePicker />
-            <Button >OK </ Button>
+
+            <h1>Tabla De Posiciones</h1>
+            <PositionTable />
           </div>
         );
     }
