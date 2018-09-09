@@ -6,7 +6,6 @@ import './PositionTable.css'
 class PositionTable extends Component {
     state = {
         teams: [],
-        notChanged: true
     }
 
     componentWillMount(){
@@ -19,7 +18,6 @@ class PositionTable extends Component {
         })
         .then(response => response.json())
         .then(resp => {
-            console.log(resp);
             this.setState({
                 teams: resp.data
             })
@@ -41,7 +39,7 @@ class PositionTable extends Component {
                     </tr>
                     </thead>
 
-                    {true &&
+                    {
                         <tbody>
                             { teams.map((team, index) => {
                                 return(
