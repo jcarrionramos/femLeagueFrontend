@@ -10,9 +10,10 @@ const columns = [{
         dataIndex: 'Local_name',
         key: 'Local_name',
     }, {
-        title: 'VS',
+        title: 'Resultado',
         dataIndex: 'vs',
         key: 'vs',
+        align: 'center'
     }, {
         title: 'Visita',
         dataIndex: 'Visit_name',
@@ -34,6 +35,9 @@ class NextMatchesTables extends Component {
         })
         .then(response => response.json())
         .then(resp => {
+            resp.data.map((current) => {
+                current.vs = "vs";
+            });
             this.setState({
                 nextMatches: resp.data
             })

@@ -1,7 +1,37 @@
 import React, { Component } from 'react';
-import { DatePicker, Button } from 'antd';
+import { Table } from 'antd';
 
-import './PositionTable.css'
+const columns = [{
+        title: 'Posición',
+        dataIndex: 'position',
+        key: 'position',
+        align: 'center'
+    }, {
+        title: 'Equipo',
+        dataIndex: 'name',
+        key: 'name'
+    }, {
+        title: 'Victorias',
+        dataIndex: 'win',
+        key: 'wins',
+        align: 'center'
+    }, {
+        title: 'Empates',
+        dataIndex: 'draw',
+        key: 'draws',
+        align: 'center'
+    }, {
+        title: 'Derrotas',
+        dataIndex: 'loss',
+        key: 'losses',
+        align: 'center'
+    }, {
+        title: 'Total',
+        dataIndex: 'total',
+        key: 'total',
+        align: 'center'
+    }
+];
 
 class PositionTable extends Component {
     state = {
@@ -18,44 +48,25 @@ class PositionTable extends Component {
         })
         .then(response => response.json())
         .then(resp => {
+            resp.data.map((current, index) => {
+                current.position = index + 1;
+            });
             this.setState({
                 teams: resp.data
-            })
+            });
         })
     }
 
     render(){
         const { teams } = this.state
+        console.log(teams)
         return (
-                <table>
-                    <thead>
-                    <tr>
-                        <th><h5>Posición</h5></th>
-                        <th><h5>Nombre</h5></th>
-                        <th><h5>Victorias</h5></th>
-                        <th><h5>Empates</h5></th>
-                        <th><h5>Derrotas</h5></th>
-                        <th><h5>Total</h5></th>
-                    </tr>
-                    </thead>
-
-                    {
-                        <tbody>
-                            { teams.map((team, index) => {
-                                return(
-                                    <tr key={index.toString()}>
-                                        <td><h6>{ index + 1 }</h6></td>
-                                        <td><h6>{ team.name }</h6></td>
-                                        <td><h6>{ team.win }</h6></td>
-                                        <td><h6>{ team.draw }</h6></td>
-                                        <td><h6>{ team.loss }</h6></td>
-                                        <td><h6>{ team.total }</h6></td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    }
-                </table>
+            <div className="PositionTable">
+                <Table
+                    pagination={false}
+                    dataSource={teams}
+                    columns={columns} />
+            </div>
         );
     }
 }

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { DatePicker, Button } from 'antd';
 import PositionTable from './components/PositionTable.js';
 import NextMatchesTables from './components/NextMatchesTable.js';
-// import MaxScoresPlayers from './components/MaxScores.js';
+import MaxScorersPlayers from './components/MaxScorersPlayers.js';
 
-import './index.css';
 
 class App extends Component {
     render(){
@@ -13,19 +12,20 @@ class App extends Component {
             <h1>Liga de Football Femenina</h1>
             <Button>OK </ Button>
 
-            <hr /><br />
+            <br /><hr /><br />
 
             <h1>Tabla De Posiciones</h1>
             <PositionTable />
 
-            <hr /><br />
+            <br /><hr /><br />
 
             <h1>Próximos Partidos</h1>
             <NextMatchesTables />
 
-            <hr /><br />
+            <br /><hr /><br />
 
             <h1>Pichichi</h1>
+            <MaxScorersPlayers />
           </div>
         );
     }
