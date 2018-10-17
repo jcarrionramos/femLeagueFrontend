@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router ,Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import UserScreen from './UserScreen.js'
 import PositionTable from './components/PositionTable.js';
@@ -12,8 +12,8 @@ class App extends Component{
     render(){
         return(
             <div>
-                <Route path="/" component={ UserScreen } />
-                <Route path="/lala" component={ LALA } />
+                <Route exact path="/" component={ UserScreen } />
+                <Route exact path="/lala" component={ LALA } />
             </div>
         );
     }
