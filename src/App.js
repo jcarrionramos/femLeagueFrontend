@@ -4,15 +4,17 @@ import { BrowserRouter as Router ,Route, Switch } from 'react-router-dom';
 import UserScreen from './UserScreen.js'
 import PositionTable from './components/PositionTable.js';
 
+const LALA = () => (
+    <h1> Hola Mundo! </h1>
+)
+
 class App extends Component{
     render(){
         return(
-            <Router>
-                <div>
-                    <Route path="/" component={ UserScreen } />
-                    <Route path="lala" component={ PositionTable } />
-                </div>
-            </Router>
+            <div>
+                <Route path="/" component={ UserScreen } />
+                <Route path="/lala" component={ LALA } />
+            </div>
         );
     }
 }
