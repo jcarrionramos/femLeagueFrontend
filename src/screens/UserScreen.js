@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { DatePicker, Button } from 'antd';
-import PositionTable from './components/PositionTable.js';
-import NextMatchesTables from './components/NextMatchesTable.js';
-import MaxScorersPlayers from './components/MaxScorersPlayers.js';
+import PositionTable from '../components/PositionTable.js';
+import NextMatchesTables from '../components/NextMatchesTable.js';
+import MaxScorersPlayers from '../components/MaxScorersPlayers.js';
 
 
 const UserScreen = () =>(
