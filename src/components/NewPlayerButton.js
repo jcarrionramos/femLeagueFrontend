@@ -135,7 +135,9 @@ class NewPlayerForm extends Component {
             }],
           })(
             <Select
+              showSearch
               placeholder="Seleccione el equipo"
+              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
             >
               <Option value="male">male</Option>
               <Option value="female">female</Option>
