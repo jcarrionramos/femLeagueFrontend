@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
+import CurrentLeague from './CurrentLeague';
+import Teams from './Teams';
+import Players from './Players';
+import Referees from './Referees';
 import Sidebar from '../components/Sidebar';
-import CurrentLeague from '../components/CurrentLeague';
-import Teams from '../components/Teams';
-import Players from '../components/Players';
-import Referees from '../components/Referees';
 
 const styles = {
   position: "relative",
@@ -13,7 +13,7 @@ const styles = {
 
 class Dashboard extends Component {
   state = {
-    current: "1"
+    current: "2"
   }
 
   handleClick = (e) => {
