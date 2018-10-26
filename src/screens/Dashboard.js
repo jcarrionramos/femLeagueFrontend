@@ -7,13 +7,14 @@ import Referees from './Referees';
 import Sidebar from '../components/Sidebar';
 
 const styles = {
-  position: "relative",
-  left:"20%"
+  position: "fixed",
+  left:"20%",
+  width: "100%"
 }
 
 class Dashboard extends Component {
   state = {
-    current: "2"
+    current: "3"
   }
 
   handleClick = (e) => {

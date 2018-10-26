@@ -34,7 +34,7 @@ const Sidebar = (props) => {
         </Menu.Item>
 
         <Menu.Item key="2">
-          <Icon type="desktop" />
+          <Icon type="skin" />
           <span>Equipos</span>
         </Menu.Item>
 
