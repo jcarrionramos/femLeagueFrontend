@@ -22,47 +22,42 @@ class OptionButtons extends Component {
 }
 
 const columns = [{
-    title: "Dorsal",
-    dataIndex: "dorsal_number",
-    key: "dorsal_number"
-  },{
     title: "Nombre",
     dataIndex: "name",
     key: "name"
   },{
-    title: "Equipo",
-    dataIndex: "team_name"
+    title: "E-mail",
+    dataIndex: "email",
+    key: "email"
   },{
     title: "Acción",
     key: "action",
     render: (text, record) => (<OptionButtons player={record} />)
 }];
 
-class PlayersTable extends Component {
+class RefereesTable extends Component {
   state = {
-    playersData: []
+    refereesData: []
   }
 
   render(){
-    const playersData = [{
-      team_name: "lala",
-      dorsal_number: 5,
+    const refereesData = [{
       name: "pedrito", //firt_name + last_name
       email: "lal@udp.cl",
       rut: 24500,
       phone: 99999
     },{
-      teamName:"lolo"
+      team_name:"lolo"
     }]
 
     return(
       <Table
         style={{marginTop:"40px", position:"relative", maxWidth:"80%"}}
         columns={columns}
-        dataSource={playersData}
+        dataSource={refereesData}
       />
     );
   }
 }
 
-export default PlayersTable;
+export default RefereesTable;

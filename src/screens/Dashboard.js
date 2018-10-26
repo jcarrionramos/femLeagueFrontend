@@ -14,7 +14,7 @@ const styles = {
 
 class Dashboard extends Component {
   state = {
-    current: "3"
+    current: "4"
   }
 
   handleClick = (e) => {
