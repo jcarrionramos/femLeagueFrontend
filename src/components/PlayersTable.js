@@ -3,7 +3,21 @@ import { Table, Popconfirm, Divider, Button, Icon } from  'antd';
 
 class OptionButtons extends Component {
   handleDelete = (rut) => {
-    console.log(rut);
+    fetch('http://localhost:9000/deleteplayer?name='+rut,{
+        method: 'GET',
+        headers: {
+            "content-type": "application/json",
+            "Accept": "application/json",
+        },
+    })
+    .then(response => response.json())
+    .then(resp => {
+      if(resp.status === 200){
+        alert("Jugador eliminado")
+      }else{
+        alert("Ups! algo ocurrió")
+      }
+    })
   }
 
   render() {
@@ -13,7 +27,7 @@ class OptionButtons extends Component {
       <div>
         <Button type="primary" shape="circle" size="small" icon="info-circle"/>
         <Divider type="vertical" />
-        <Popconfirm title={caption} onConfirm={() => this.handleDelete(player.rut)}>
+        <Popconfirm title={ caption } onConfirm={() => this.handleDelete(player.rut)}>
           <a style={{color: "red"}} href="javascript:;">Eliminar</a>
         </Popconfirm>
       </div>

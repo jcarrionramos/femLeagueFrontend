@@ -3,7 +3,21 @@ import { Table, Popconfirm } from  'antd';
 
 class DeleteTeamButton extends Component {
   handleDelete = (teamName) => {
-    console.log(teamName);
+    fetch('http://localhost:9000/deleteteam?name='+teamName,{
+        method: 'GET',
+        headers: {
+            "content-type": "application/json",
+            "Accept": "application/json",
+        },
+    })
+    .then(response => response.json())
+    .then(resp => {
+      if(resp.status === 200){
+        alert("Equipo eliminado")
+      }else{
+        alert("Ups! algo ocurrió")
+      }
+    })
   }
 
   render() {
@@ -18,29 +32,39 @@ class DeleteTeamButton extends Component {
   }
 }
 
+const columns = [{
+    title: "Nombre",
+    dataIndex: "name",
+    key: "name"
+  },{
+    title: "Acción",
+    key: "action",
+    render: (text, record) => (<DeleteTeamButton teamName={record.name} />)
+}];
+
 class TeamsTable extends Component {
   state = {
-    columns: [],
     teamsData: []
   }
 
+  componentDidMount() {
+    fetch('http://localhost:9000/positions',{
+        method: 'GET',
+        headers: {
+            "content-type": "application/json",
+            "Accept": "application/json",
+        },
+    })
+    .then(response => response.json())
+    .then(resp => {
+        this.setState({
+            teamsData: resp.data
+        });
+    })
+  }
+
   render(){
-    const columns = [{
-        title: "Nombre",
-        dataIndex: "teamName",
-        key: "teamName"
-      },{
-        title: "Acción",
-        key: "action",
-        render: (text, record) => (<DeleteTeamButton teamName={record.teamName} />)
-    }];
-
-    const teamsData = [{
-      teamName: "lala"
-    },{
-      teamName:"lolo"
-    }]
-
+    const { teamsData } = this.state
     return(
       <Table style={{marginTop:"40px"}} columns={columns} dataSource={teamsData} />
     );

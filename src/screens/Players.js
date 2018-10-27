@@ -8,10 +8,9 @@ const Players = () => {
     <div style={{paddingTop:"25px"}} className="team-screen">
       <h1 style={{position: "fixed", marginLeft:"12px"}}> Jugadores </h1>
 
-      <NewPlayerButton />
-
-      <PlayersTable />
-
+        <NewPlayerButton />
+        
+        <PlayersTable />
     </div>
   );
 }
