@@ -18,7 +18,26 @@ class NewRefereeForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        fetch('http://localhost:9000/newreferee',{
+          method: 'POST',
+          headers: {
+                "content-type": "application/json",
+                "Accept": "application/json",
+            },
+          body: JSON.stringify(values),
+        })
+        .then(response => response.json())
+        .then(resp => {
+          if(resp.status === 200){
+                alert('referee agregado correctamente!')
+            } else {
+                alert('Ups! ha ocurrido un problema, intenta nuevamente')
+            }
+        })
+        .catch(error => {
+            alert('Ups! ha ocurrido un problema, intenta nuevamente')
+            console.log(error)
+        })
       }
     });
   }
@@ -64,10 +83,12 @@ class NewRefereeForm extends Component {
       >
         {getFieldDecorator('rut', {
           rules: [{
+            type:'number', message: 'Ingrese un rut',
+          },{
             required: true, message: 'Porfavor ingrese un rut',
           }],
         })(
-          <Input />
+          <InputNumber />
         )}
       </FormItem>
 

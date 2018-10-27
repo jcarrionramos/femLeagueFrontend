@@ -8,7 +8,24 @@ class NewPlayerForm extends Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
+    teams: []
   };
+
+  componentDidMount() {
+    fetch('http://localhost:9000/positions',{
+      method: 'GET',
+      headers: {
+          "content-type": "application/json",
+          "Accept": "application/json",
+      },
+    })
+    .then(response => response.json())
+    .then(resp => {
+      this.setState({
+          teams: resp.data
+      });
+    })
+  }
 
   handleReset = () => {
     this.props.form.resetFields();
@@ -18,7 +35,26 @@ class NewPlayerForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        fetch('http://localhost:9000/newplayer',{
+          method: 'POST',
+          headers: {
+                "content-type": "application/json",
+                "Accept": "application/json",
+            },
+          body: JSON.stringify(values),
+        })
+        .then(response => response.json())
+        .then(resp => {
+          if(resp.status === 200){
+                alert('Jugador agregado correctamente!')
+            } else {
+                alert('Ups! ha ocurrido un problema, intenta nuevamente')
+            }
+        })
+        .catch(error => {
+            alert('Ups! ha ocurrido un problema, intenta nuevamente')
+            console.log(error)
+        })
       }
     });
   }
@@ -30,7 +66,7 @@ class NewPlayerForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
+    const { autoCompleteResult, teams } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -64,10 +100,12 @@ class NewPlayerForm extends Component {
       >
         {getFieldDecorator('rut', {
           rules: [{
+            type: 'number', message: 'rut no válido',
+          },{
             required: true, message: 'Porfavor ingrese un rut',
           }],
         })(
-          <Input />
+          <InputNumber />
         )}
       </FormItem>
 
@@ -135,12 +173,13 @@ class NewPlayerForm extends Component {
             }],
           })(
             <Select
-              showSearch
               placeholder="Seleccione el equipo"
-              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
             >
-              <Option value="male">male</Option>
-              <Option value="female">female</Option>
+              { teams.map((team, index) => {
+                return(
+                  <Option value={team.name} key={index}> {team.name} </Option>
+                );
+              })}
             </Select>
           )}
         </FormItem>
@@ -151,10 +190,10 @@ class NewPlayerForm extends Component {
         >
           {getFieldDecorator('dorsal_number', {
             rules: [{
-              required: true, message: 'Porfavor un número!',
+              required: true, message: 'Porfavor ingrese un número!',
             }],
           })(
-            <InputNumber min={1} max={99} />
+            <Input/>
           )}
         </FormItem>
 

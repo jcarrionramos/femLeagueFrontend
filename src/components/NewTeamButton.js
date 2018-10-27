@@ -13,7 +13,25 @@ class NewTeamForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        fetch('http://localhost:9000/newteam?name='+values.name,{
+          method: 'GET',
+          headers: {
+                "content-type": "application/json",
+                "Accept": "application/json",
+          }
+        })
+        .then(response => response.json())
+        .then(resp => {
+          if(resp.status === 200){
+                alert('Equipo agregado correctamente!')
+            } else {
+                alert('Ups! ha ocurrido un problema, intenta nuevamente')
+            }
+        })
+        .catch(error => {
+            alert('Ups! ha ocurrido un problema, intenta nuevamente')
+            console.log(error)
+        })
       }
     });
   }
@@ -51,7 +69,7 @@ class NewTeamForm extends Component {
     };
 
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
           label="Nombre del Equipo"

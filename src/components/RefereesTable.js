@@ -13,7 +13,7 @@ class OptionButtons extends Component {
       <div>
         <Button type="primary" shape="circle" size="small" icon="info-circle"/>
         <Divider type="vertical" />
-        <Popconfirm title={caption} onConfirm={() => this.handleDelete(player.rut)}>
+        <Popconfirm title={ caption } onConfirm={() => this.handleDelete(player.rut)}>
           <a style={{color: "red"}} href="javascript:;">Eliminar</a>
         </Popconfirm>
       </div>
